@@ -19,6 +19,7 @@ RUN cd /tmp && rm -rf vim.zip vim-master
 ADD ./vimrc /root/.vimrc
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ADD ./YouCompleteMe.tar.gz /root/.vim/bundle/
+RUN cd /root/.vim/bundle/YouCompleteMe && git pull && git submodule update --init --recursive
 RUN cd /root/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --go-completer
 RUN vim -c PluginInstall -c q -c q
 RUN cd /root/.vim/bundle/YouCompleteMe && rm -rf .git ./third_party/ycmd/third_party/OmniSharpServer 
